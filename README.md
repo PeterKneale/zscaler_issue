@@ -1,15 +1,15 @@
 # pip fails inside `docker build` behind Zscaler
 
-**Fails** (pip in a build step)
+**Fails**
 
 ```shell
-docker build --no-cache .
+docker build .
 ```
 
-**Works** (same pip command in a running container)
+**Works**
 
 ```shell
-docker run --rm python:3.14-slim pip download --no-deps -d /tmp/dl hatchling
+docker run --rm python:3.14-slim pip download hatchling
 ```
 
 Zscaler re-signs pypi.org. OrbStack gives running containers the Zscaler root, build steps get nothing, so the build dies with `CERTIFICATE_VERIFY_FAILED`.
